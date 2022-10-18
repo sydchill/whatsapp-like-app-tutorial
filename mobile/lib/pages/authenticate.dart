@@ -150,7 +150,7 @@ class _AuthenticateState extends State<Authenticate> {
               });
             },
             child: Text(
-              'Sign Up',
+              'Sign In',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
