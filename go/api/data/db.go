@@ -47,16 +47,16 @@ func Connection() error {
 
 func Open() (*Connect, error) {
 
-	open := &Connect{DB: ConnectionDB["postgres"]}
+	connect := &Connect{DB: ConnectionDB["postgres"]}
 
-	tx, err := open.DB.Begin()
+	tx, err := connect.DB.Begin()
 
 	if err != nil {
 
 		return nil, fmt.Errorf("Unable to connect to database: %v", err)
 	}
 
-	open.TX = tx
+	connect.TX = tx
 
-	return open, nil
+	return connect, nil
 }

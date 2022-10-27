@@ -16,6 +16,8 @@ func CreateUserHandler(writer http.ResponseWriter, request *http.Request) {
 
 	defer access.DB.Close()
 
+	data := NewUserDA(access)
+
 }
 
 func MakeUserHandlers(router *mux.Router) error {
