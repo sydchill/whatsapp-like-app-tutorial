@@ -4,7 +4,7 @@ CREATE SCHEMA IF NOT EXISTS hidotcom;
 -- user
 CREATE TABLE IF NOT EXISTS hidotcom.user (
     user_id SERIAL PRIMARY KEY,
-    user_password TEXT NOT NULL,
+    hash_password TEXT NOT NULL,
     token TEXT NOT NULL,
     refresh_token TEXT NOT NULL,
     creation_date TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() AT TIME ZONE 'utc')
@@ -18,5 +18,7 @@ CREATE TABLE IF NOT EXISTS hidotcom.user_profile (
     email TEXT NOT NULL,
     "name" TEXT,
     surname TEXT,
-    about TEXT
+    about TEXT,
+    creation_date TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() AT TIME ZONE 'utc')
+
 );

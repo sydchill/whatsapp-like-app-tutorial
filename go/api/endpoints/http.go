@@ -36,7 +36,7 @@ func InternalServerError(writer http.ResponseWriter, request *http.Request, err 
 }
 
 //BadRequest provide  400 bad request
-func BadRequest(writer http.ResponseWriter, request *http.Request, message error) {
+func BadRequest(writer http.ResponseWriter, request *http.Request, message string) {
 	writer.Header().Set("Content-Type", "text/plain")
 	writer.WriteHeader(http.StatusBadRequest)
 	fmt.Fprint(writer, message)
