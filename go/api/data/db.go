@@ -60,3 +60,36 @@ func Open() (*Connect, error) {
 
 	return connect, nil
 }
+
+type Mapping[T any] func(*sql.Rows) (T, error)
+
+func Query[T any, S []T](da *Connect, queryString string, mapping Mapping[T], args ...any) (S, error) {
+
+	if mapping == nil {
+
+		_, err := da.TX.Exec(queryString, args...)
+
+		return nil, err
+	}
+
+	rows, err := da.TX.Query(queryString, args...)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	results := make(S, 0)
+	for rows.Next() {
+		result, err := mapping(rows)
+
+		if err != nil {
+			return nil, err
+		}
+
+		results = append(results, result)
+	}
+
+	return results, nil
+
+}
